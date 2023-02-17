@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class HealthPlayer : MonoBehaviour
 {
     [SerializeField] private float _playerHitPoints;
-    [SerializeField] private UnityAction _changingHealth;
     [SerializeField] private float _change = 10;
 
     private float _maxHealth = 100;
     private float _minHealth = 0;
     public float PlayerHitPoints => _playerHitPoints;
     public float MaxHealth => _maxHealth;
+    public UnityAction ChangingHealth;
 
     public void TakeDamage()
     {
@@ -21,7 +21,7 @@ public class HealthPlayer : MonoBehaviour
             _playerHitPoints -= _change;
         }
 
-        _changingHealth?.Invoke();
+        ChangingHealth?.Invoke();
     }
 
     public void TakeHeal()
@@ -31,6 +31,6 @@ public class HealthPlayer : MonoBehaviour
             _playerHitPoints += _change;
         }
 
-        _changingHealth?.Invoke();
+        ChangingHealth?.Invoke();
     }
 }

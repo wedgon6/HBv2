@@ -10,8 +10,7 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _healthBar;
     [SerializeField] private HealthPlayer _healthPlayer;
-    
-    private Coroutine _coroutine;
+
     private float _speedChange = 0.5f;
 
     private void Start()
@@ -21,20 +20,6 @@ public class HealthBar : MonoBehaviour
 
     public void OnChangingHealth()
     {
-        if (_healthBar.value != _healthPlayer.PlayerHitPoints)
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-
-            _coroutine = StartCoroutine(ChangingHealthValue());
-        }
-    }
-
-    private IEnumerator ChangingHealthValue()
-    {
         _healthBar.DOValue(_healthPlayer.PlayerHitPoints, _speedChange);
-        yield return null;
     }
 }
